@@ -261,6 +261,7 @@ struct ARN {
 	}
 
 
+	//=======================================change in git open==========================================================
 	nod *cautare(int i) {
 		nod *x = rad;
 		while (x != nil && x->info != i) {
