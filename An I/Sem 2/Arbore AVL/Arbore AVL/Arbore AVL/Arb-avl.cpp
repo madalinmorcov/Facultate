@@ -2,7 +2,10 @@
 
 AVL::AVL()
 {
-	this->root = NULL;
+	nil = new node;
+	nil->fb = 0;
+	nil->left = nil->right = nil->p = nil;
+	this->root = this->nil;
 }
 
 AVL::~AVL()
@@ -13,7 +16,7 @@ AVL::~AVL()
 node * AVL::search(int z)
 {
 	node *q = this->root;
-	while (q != NULL && z != q->key)
+	while (q != nil && z != q->key)
 	{
 		if (z > q->key)
 			q = q->right;
@@ -24,7 +27,7 @@ node * AVL::search(int z)
 
 void AVL::In_order(node * q)
 {
-		if (q == NULL)
+		if (q == nil)
 			return;
 		In_order(q->left);
 		cout<<q->key<<" ";
@@ -33,12 +36,12 @@ void AVL::In_order(node * q)
 
 void AVL::Pre_order(node *q)
 {
-	if (q!= NULL)
+	if (q!= nil)
 	{
 		cout << q->key<<" ";
-		if (q->left != NULL)
+		if (q->left != nil)
 			Pre_order(q->left);
-		if (q->right != NULL)
+		if (q->right != nil)
 			Pre_order(q->right);
 	}
 }
@@ -48,10 +51,10 @@ void AVL::Rot_left(node * q)
 	node *y;
 	y = q->right;
 	q->right = y->left;
-	if (y->left != NULL)
+	if (y->left != nil)
 		y->left->p = q;
 	y->p = q->p;
-	if (q->p == NULL)
+	if (q->p == nil)
 		this->root = y;
 	else
 	{
@@ -70,10 +73,10 @@ void AVL::Rot_right(node * q)
 		node *y;
 		y = q->left;
 		q->left = y->right;
-		if (y->right != NULL)
+		if (y->right != nil)
 			y->right->p = q;
 		y->p = q->p;
-		if (q->p == NULL)
+		if (q->p == nil)
 			this->root = y;
 		else
 		{
@@ -98,7 +101,7 @@ void AVL::FB(node *q,int path)
 			return;
 		else
 		{
-			if (q->p != NULL) {
+			if (q->p != nil) {
 				if (q->p->left == q)
 					path = 0;
 				else
@@ -117,7 +120,7 @@ void AVL::FB(node *q,int path)
 				return;
 			else
 			{
-				if (q->p != NULL) {
+				if (q->p != nil) {
 					if (q->p->left == q)
 						path = 0;
 					else
@@ -133,20 +136,20 @@ void AVL::insertie(int z)
 {
 	node *k;
 
-	if (this->root == NULL)
+	if (this->root == nil)
 	{
 		this->root = new node;
-		this->root->p = NULL;
+		this->root->p = nil;
 		this->root->fb = 0;
 		this->root->key = z;
-		this->root->left = NULL;
-		this->root->right = NULL;
+		this->root->left = nil;
+		this->root->right = nil;
 	}
 	else
 	{
 		node *q = new node;
 		k = root;
-		while (k != NULL)
+		while (k != nil)
 		{
 			q = k;
 			if (z > k->key )
@@ -162,8 +165,8 @@ void AVL::insertie(int z)
 		k = new node;
 		k->key = z;
 		k->fb = 0;
-		k->left = NULL;
-		k->right = NULL;
+		k->left = nil;
+		k->right = nil;
 		k->p = q;
 		if (q->key > k->key)
 		{
@@ -181,6 +184,10 @@ void AVL::insertie(int z)
 	
 }
 
+void AVL::stergere(int z)
+{
+}
+
 void AVL::repair(node * k,int path)
 {
 	
@@ -188,7 +195,7 @@ void AVL::repair(node * k,int path)
 		return;
 	if (k->fb != -2 && k->fb != 2)
 	{
-		if(k->p!=NULL)
+		if(k->p!=nil)
 			if (k->p->left == k)
 				path = 0;
 			else 
@@ -215,7 +222,7 @@ void AVL::repair(node * k,int path)
 			y->fb = 0;
 			k->fb = 1;
 		}
-		if (k->p != NULL)
+		if (k->p != nil)
 			if (k->p->left == k)
 				path = 0;
 			else 
@@ -243,7 +250,7 @@ void AVL::repair(node * k,int path)
 			y->fb = 0;
 			k->fb = -1;
 		}
-		if (k->p != NULL)
+		if (k->p != nil)
 			if (k->p->left == k)
 				path = 0;
 			else

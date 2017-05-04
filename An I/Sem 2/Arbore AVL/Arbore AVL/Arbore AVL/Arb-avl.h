@@ -12,8 +12,7 @@ struct node
 class AVL
 {
 public:
-	node *root;
-public:
+	node *root,*nil;
 	AVL();
 	~AVL();
 	void FB(node *q,int path);
@@ -23,7 +22,7 @@ public:
 	void Rot_left(node *q);
 	void Rot_right(node * q);
 	void insertie(int z);
-	void stergere(int z);
+	void stergere(int z);  /* TO DO*/
 	void repair(node *k,int path);
 };
 
