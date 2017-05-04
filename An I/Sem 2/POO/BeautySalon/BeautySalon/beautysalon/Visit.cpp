@@ -9,11 +9,11 @@ string Visit::getName() {
 }
 
 double Visit::getServiceExpense() {
-	return this->serviceExpense;
+	return this->serviceExpense - this->serviceExpense * this->customer.getServiceDiscountRate(this->customer.getMemberType());;
 }
 
 void Visit::setServiceExpense(double servExpense) {
-	this->serviceExpense = servExpense - servExpense * this->customer.getServiceDiscountRate(this->customer.getMemberType());
+	this->serviceExpense = servExpense;
 }
 
 double Visit::getProductExpense() {
