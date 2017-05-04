@@ -16,8 +16,7 @@ public:
 public:
 	AVL();
 	~AVL();
-	void FB(node *q);
-	int inaltime(node *q);
+	void FB(node *q,int path);
 	node* search(int z);
 	void In_order(node *q);
 	void Pre_order(node *q);
