@@ -4,48 +4,48 @@
 using namespace std;
 
 struct nod {
-	int info, bh;
+	int key, bh;
 	char color;
-	nod *p, *st, *dr;
+	nod *p, *left, *right;
 };
 
-struct ARN {
-	nod *nil, *rad;
-	ARN() {
+struct RBT {
+	nod *nil, *root;
+	RBT() {
 		nil = new nod;
 		nil->color = 'N';
-		nil->st = nil->dr = nil;
-		rad = nil;
+		nil->left = nil->right = nil;
+		root = nil;
 	}
 
 	void insert(nod *z) {
 		nod *y = nil;
-		nod *x = rad;
+		nod *x = root;
 		while (x != nil) {
 			y = x;
-			if (z->info < x->info)
-				x = x->st;
+			if (z->key < x->key)
+				x = x->left;
 			else
-				x = x->dr;
+				x = x->right;
 		}
 		z->p = y;
 		if (y == nil)
-			rad = z;
+			root = z;
 		else
-			if (z->info < y->info)
-				y->st = z;
+			if (z->key < y->key)
+				y->left = z;
 			else
-				y->dr = z;
-		z->st = z->dr = nil;
+				y->right = z;
+		z->left = z->right = nil;
 		z->color = 'R';
-		ARN_insertRepair(z);
+		RBT_insertRepair(z);
 	}
 
-	void ARN_insertRepair(nod *z) {
+	void RBT_insertRepair(nod *z) {
 		nod *u;
 		while (z->p->color == 'R') {
-			if (z->p == z->p->p->st) {
-				u = z->p->p->dr;
+			if (z->p == z->p->p->left) {
+				u = z->p->p->right;
 				if (u->color == 'R') {
 					u->color = 'N';
 					z->p->color = 'N';
@@ -53,17 +53,17 @@ struct ARN {
 					z = z->p->p;
 				}
 				else {
-					if (z == z->p->dr) {
+					if (z == z->p->right) {
 						z = z->p;
-						RotSt(z);
+						Rot_Left(z);
 					}
 					z->p->color = 'N';
 					z->p->p->color = 'R';
-					RotDr(z->p->p);
+					Rot_Right(z->p->p);
 				}
 			}
 			else {
-				u = z->p->p->st;
+				u = z->p->p->left;
 				if (u->color == 'R') {
 					u->color = 'N';
 					z->p->color = 'N';
@@ -71,61 +71,61 @@ struct ARN {
 					z = z->p->p;
 				}
 				else {
-					if (z == z->p->st) {
+					if (z == z->p->left) {
 						z = z->p;
-						RotDr(z);
+						Rot_Right(z);
 					}
 					z->p->color = 'N';
 					z->p->p->color = 'R';
-					RotSt(z->p->p);
+					Rot_Left(z->p->p);
 				}
 			}
 		}
-		rad->color = 'N';
+		root->color = 'N';
 	}
 
-	void RotSt(nod *z) {
+	void Rot_Left(nod *z) {
 		nod *y;
-		y = z->dr;
-		z->dr = y->st;
-		if (y->st != nil)
-			y->st->p = z;
+		y = z->right;
+		z->right = y->left;
+		if (y->left != nil)
+			y->left->p = z;
 		y->p = z->p;
 		if (z->p == nil) 
-			rad = y;
+			root = y;
 		else
-			if (z == z->p->st)
-				z->p->st = y;
+			if (z == z->p->left)
+				z->p->left = y;
 			else
-				z->p->dr = y;
-		y->st = z;
+				z->p->right = y;
+		y->left = z;
 		z->p = y;
 	}
 
-	void RotDr(nod *z) {
+	void Rot_Right(nod *z) {
 		nod *y;
-		y = z->st;
-		z->st = y->dr;
-		if (y->dr != nil)
-			y->dr->p = z;
+		y = z->left;
+		z->left = y->right;
+		if (y->right != nil)
+			y->right->p = z;
 		y->p = z->p;
 		if (z->p == nil)
-			rad = y;
+			root = y;
 		else
-			if (z == z->p->dr)
-				z->p->dr = y;
+			if (z == z->p->right)
+				z->p->right = y;
 			else
-				z->p->st = y;
-		y->dr = z;
+				z->p->left = y;
+		y->right = z;
 		z->p = y;
 	}
 
-	nod *succesor(nod *x) {
-		if (x->dr != nil)
-			return min(x->dr);
+	nod *successor(nod *x) {
+		if (x->right != nil)
+			return min(x->right);
 		else {
 			nod *y = x->p;
-			while (y != nil && x == y->dr) {
+			while (y != nil && x == y->right) {
 				x = y;
 				y = y->p;
 			}
@@ -135,182 +135,159 @@ struct ARN {
 
 	void transplant(nod *u, nod *v) {
 		if (u->p == nil)
-			rad = v;
+			root = v;
 		else {
-			if (u == u->p->st)
-				u->p->st = v;
+			if (u == u->p->left)
+				u->p->left = v;
 			else
-				u->p->dr = v;
+				u->p->right = v;
 		}
 		v->p = u->p;
 	}
 
-	//============================================================================================
-	void RBDeleteRepara(nod* x)
-	{
-		nod* F;
-		while (x != rad && x->color == 'N')
-			if (x->p->st == x)
-
-			{
-				F = x->p->dr;
-				if (F->color == 'R')
-				{
-					F->color = 'N';
+	void RedBlackDeleteRepair(nod* x) {
+		nod* y;
+		while (x != root && x->color == 'N')
+			if (x->p->left == x) {
+				y = x->p->right;
+				if (y->color == 'R') {
+					y->color = 'N';
 					x->p->color = 'R';
-					RotSt(x->p);
-					F = x->p->dr;
+					Rot_Left(x->p);
+					y = x->p->right;
 				}
-				if (F->st->color == 'N' && F->dr->color == 'N')
-				{
-					F->color = 'R';
+				if (y->left->color == 'N' && y->right->color == 'N') {
+					y->color = 'R';
 					x = x->p;
 				}
-				else
-				{
-					if (F->dr->color == 'N')
-					{
-						F->color = 'R';
-						F->st->color = 'N';
-						RotDr(F);
-						F = x->p->dr;
+				else {
+					if (y->right->color == 'N') {
+						y->color = 'R';
+						y->left->color = 'N';
+						Rot_Right(y);
+						y = x->p->right;
 					}
-					F->color = x->p->color;
+					y->color = x->p->color;
 					x->p->color = 'N';
-					F->dr->color = 'N';
-					RotSt(x->p);
-					x = rad;
+					y->right->color = 'N';
+					Rot_Left(x->p);
+					x = root;
 				}
 			}
 			else
-				if (x->p->dr == x)
-				{
-					F = x->p->st;
-					if (F->color == 'R')
-					{
-						F->color = 'N';
+				if (x->p->right == x) {
+					y = x->p->left;
+					if (y->color == 'R') {
+						y->color = 'N';
 						x->p->color = 'R';
-						RotDr(x->p);
-						F = x->p->st;
+						Rot_Right(x->p);
+						y = x->p->left;
 					}
-					if (F->dr->color == 'N' && F->st->color == 'N')
-					{
-						F->color = 'R';
+					if (y->right->color == 'N' && y->left->color == 'N') {
+						y->color = 'R';
 						x = x->p;
 					}
-					else
-					{
-						if (F->st->color == 'N')
-						{
-							F->color = 'R';
-							F->dr->color = 'N';
-							RotSt(F); //????
-							F = x->p->st;
+					else {
+						if (y->left->color == 'N') {
+							y->color = 'R';
+							y->right->color = 'N';
+							Rot_Left(y);
+							y = x->p->left;
 						}
-						F->color = x->p->color;
+						y->color = x->p->color;
 						x->p->color = 'N';
-						F->st->color = 'N';
-						RotDr(x->p);
-						x = rad;
+						y->left->color = 'N';
+						Rot_Right(x->p);
+						x = root;
 					}
 				}
 		x->color = 'N';
 	}
 
-
-	void RBDelete(nod* z)
-	{
+	void RedBlackDelete(nod* z) {
 		nod* y;
 		nod* x;
 		y = z;
-		char y_org_color;
-		y_org_color = y->color;
-		if (z->st == nil)
-		{
-			x = z->dr;
+		char yOriginalColor;
+		yOriginalColor = y->color;
+		if (z->left == nil) {
+			x = z->right;
 			transplant(z, x);
 		}
-		else
-		{
-			if (z->dr == nil)
-			{
-				x = z->st;
+		else {
+			if (z->right == nil) {
+				x = z->left;
 				transplant(z, x);
 			}
-			else
-			{
-				y = succesor(z);
-				y_org_color = y->color;
-				x = y->dr;
+			else {
+				y = successor(z);
+				yOriginalColor = y->color;
+				x = y->right;
 				if (y->p == z)
 					x->p = y;
-				else
-				{
+				else {
 					transplant(y, x);
-					y->dr = z->dr;
-					y->dr->p = y;
+					y->right = z->right;
+					y->right->p = y;
 				}
 				transplant(z, y);
-				y->st = z->st;
-				y->st->p = y;
+				y->left = z->left;
+				y->left->p = y;
 				y->color = z->color;
 			}
 		}
-		if (y_org_color == 'N')
-			RBDeleteRepara(x);
+		if (yOriginalColor == 'N')
+			RedBlackDeleteRepair(x);
 	}
 
-
-	//=======================================change in git open==========================================================
-	nod *cautare(int i) {
-		nod *x = rad;
-		while (x != nil && x->info != i) {
-			if (x->info > i)
-				x = x->st;
+	nod *search(int i) {
+		nod *x = root;
+		while (x != nil && x->key != i) {
+			if (x->key > i)
+				x = x->left;
 			else
-				x = x->dr;
+				x = x->right;
 		}
 		return x;
 	}
 
 	nod *min(nod *x) {
-		while (x->st != nil)
-			x = x->st;
+		while (x->left != nil)
+			x = x->left;
 		return x;
 	}
 
 	nod *max(nod *x) {
-		while (x->dr != nil)
-			x = x->dr;
+		while (x->right != nil)
+			x = x->right;
 		return x;
 	}
 
-	void RSD(nod *x) {
+	void RootLR(nod *x) {
 		if (x != nil)
 		{
-			cout << x->info << " " << x->color << "; ";
-			if (x->st != nil)
-				RSD(x->st);
-			if (x->dr != nil)
-				RSD(x->dr);
+			cout << x->key << " " << x->color << "; ";
+			if (x->left != nil)
+				RootLR(x->left);
+			if (x->right != nil)
+				RootLR(x->right);
 		}
 	}
 
 };
 
 int main() {
-	ARN *T = new ARN;
+	RBT *Tree = new RBT;
 	nod *z = new nod;
-	ifstream fin("data.txt");
-	fin >> z->info;
-	while (z->info != -42) {
-		T->insert(z);
+	ifstream inputFile("data.txt");
+	inputFile >> z->key;
+	while (z->key != -42) {
+		Tree->insert(z);
 		z = new nod;
-		fin >> z->info;
+		inputFile >> z->key;
 	}
 	z = new nod;
-	z = T->cautare(11);
-	T->RBDelete(z);
-	T->RSD(T->rad);
-	//	cout << T->rad->info << " "; cout << T->rad->st->info << " "; cout << T->rad->dr->info << " ";
+	z = Tree->search(11);
+	Tree->RedBlackDelete(z);
+	Tree->RootLR(Tree->root);
 }
