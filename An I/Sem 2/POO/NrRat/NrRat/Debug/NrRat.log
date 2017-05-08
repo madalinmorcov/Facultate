@@ -1,0 +1,50 @@
+﻿  Source.cpp
+c:\program files (x86)\microsoft visual studio 14.0\vc\include\xstddef(239): error C2678: binary '<': no operator found which takes a left-hand operand of type 'const NrRat' (or there is no acceptable conversion)
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\system_error(436): note: could be 'bool std::operator <(const std::error_condition &,const std::error_condition &) noexcept'
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\system_error(427): note: or       'bool std::operator <(const std::error_code &,const std::error_code &) noexcept'
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xstddef(239): note: while trying to match the argument list '(const NrRat, const NrRat)'
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xstddef(238): note: while compiling class template member function 'bool std::less<_Kty>::operator ()(_Ty &,_Ty &) const'
+          with
+          [
+              _Kty=const NrRat,
+              _Ty=const NrRat
+          ]
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xutility(896): note: see reference to function template instantiation 'bool std::less<_Kty>::operator ()(_Ty &,_Ty &) const' being compiled
+          with
+          [
+              _Kty=const NrRat,
+              _Ty=const NrRat
+          ]
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\type_traits(421): note: see reference to class template instantiation 'std::less<_Kty>' being compiled
+          with
+          [
+              _Kty=const NrRat
+          ]
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xutility(265): note: see reference to class template instantiation 'std::is_empty<_Ty1>' being compiled
+          with
+          [
+              _Ty1=std::less<const NrRat>
+          ]
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\xtree(957): note: see reference to class template instantiation 'std::_Tree_comp_alloc<_Traits>' being compiled
+          with
+          [
+              _Traits=std::_Tmap_traits<const NrRat,int,std::less<const NrRat>,std::allocator<std::pair<const NrRat,int>>,false>
+          ]
+  c:\program files (x86)\microsoft visual studio 14.0\vc\include\map(73): note: see reference to class template instantiation 'std::_Tree<std::_Tmap_traits<_Kty,_Ty,_Pr,_Alloc,false>>' being compiled
+          with
+          [
+              _Kty=const NrRat,
+              _Ty=int,
+              _Pr=std::less<const NrRat>,
+              _Alloc=std::allocator<std::pair<const NrRat,int>>
+          ]
+  c:\users\madalin\dropbox\facultate\an i\sem 2\poo\nrrat\nrrat\source.cpp(46): note: see reference to class template instantiation 'std::map<const NrRat,int,std::less<_Kty>,std::allocator<std::pair<_Kty,_Ty>>>' being compiled
+          with
+          [
+              _Kty=const NrRat,
+              _Ty=int
+          ]
+  Generating Code...
+  Compiling...
+  NrRat.cpp
+  Generating Code...
