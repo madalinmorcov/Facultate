@@ -26,14 +26,24 @@ int NrRat::getB() {
 }
 
 NrRat NrRat::operator+(NrRat n) {
-	a = a*n.b + n.a*b;
-	b = b*n.b;
+	if (b != n.b)
+	{
+		a = a*n.b + n.a*b;
+		b = b*n.b;
+	}
+	else
+		a = a + n.a;
 	return (*this);
 }
 
 NrRat NrRat::operator-(NrRat n) {
-	a = a*n.b - n.a*b;
-	b = b*n.b;
+	if (b != n.b)
+	{
+		a = a*n.b - n.a*b;
+		b = b*n.b;
+	}
+	else
+		a = a - n.a;
 	return (*this);
 }
 
@@ -49,11 +59,11 @@ NrRat NrRat::operator/(NrRat n) {
 	return (*this);
 }
 
-bool operator<(NrRat n)
+bool operator<(NrRat n,NrRat m)
 {
-	double x = (double)a/b;
-	double y = (double)n.a/n.b;
-	if(x<y)
+	double x = (double)n.a / n.b;
+	double y = (double)m.a / m.b;
+	if (x<y)
 		return true;
 	return false;
 }
