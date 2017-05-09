@@ -49,6 +49,14 @@ NrRat NrRat::operator/(NrRat n) {
 	return (*this);
 }
 
+bool operator<(NrRat n)
+{
+	double x = (double)a/b;
+	double y = (double)n.a/n.b;
+	if(x<y)
+		return true;
+	return false;
+}
 istream & operator>>(istream & flux, NrRat & n) {
 	cout << "Numarator: ";
 	flux >> n.a;
