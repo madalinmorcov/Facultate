@@ -1,6 +1,5 @@
 #include "NrRat.h"
 #include <map>
-#include <vector>
 
 void citire(NrRat &a, NrRat &b) {
 	cout << "x= ";
@@ -10,10 +9,10 @@ void citire(NrRat &a, NrRat &b) {
 }
 int main() {
 
-	int option=0;
+	int option = 0;
 	do {
 		cout << "0-exit \n1-add \n2-substract \n3-multiply \n4-devide \n5-sortByValue \n6-primele 2 numere cele mai mici: \n7-numar de aparitii \n";
-		
+
 	start:
 		cin >> option;
 		if (option < 0 || option>7) {
@@ -43,21 +42,21 @@ int main() {
 				cout << r;
 			}
 			if (option >= 5) {
-				map<const NrRat, int> numbers;
-				pair< map<const NrRat, int>::iterator, bool> ret;
-				map<const NrRat, int>::iterator it;
+				map<NrRat, int> numbers;
+				pair< map<NrRat, int>::iterator, bool> ret;
+				map< NrRat, int>::iterator it;
 				NrRat n;
 				int k;
 				cout << "nr elemente: ";
 				cin >> k;
 				for (int i = 0; i < k; i++) {
 					cin >> n;
-					ret = numbers.insert(pair<const NrRat, int>(n, 1));
+					ret = numbers.insert(pair<NrRat, int>(n, 1));
 					if (!ret.second)
 						ret.first->second++;
 				}
 
-				
+
 				if (option == 5)
 					for (it = numbers.begin(); it != numbers.end(); ++it)
 						cout << (*it).first;
@@ -74,9 +73,8 @@ int main() {
 
 			}
 
-			
+
 		}
 	} while (option);
 
 }
-
