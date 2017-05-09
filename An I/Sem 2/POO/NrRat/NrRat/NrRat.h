@@ -13,11 +13,12 @@ public:
 	void setB(int);
 	int getA();
 	int getB();
+	friend bool operator<(NrRat,NrRat);
 	friend istream &operator>>(istream &flux, NrRat &n);
 	friend ostream &operator<<(ostream &flux, NrRat n);
 	NrRat operator+(NrRat);
 	NrRat operator-(NrRat);
 	NrRat operator*(NrRat);
 	NrRat operator/(NrRat);
-	bool operator<(NrRat);
+	
 };
