@@ -19,4 +19,5 @@ public:
 	NrRat operator-(NrRat);
 	NrRat operator*(NrRat);
 	NrRat operator/(NrRat);
+	bool operator<(NrRat);
 };
