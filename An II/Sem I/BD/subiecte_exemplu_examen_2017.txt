@@ -1,0 +1,83 @@
+
+Examen			Consultatii		Ora             Sala
+22.06			20.06			16:30           PIII1
+
+1) Baze de date - definitie, proprietati, operatii, domenii utilizare - C1
+2) Date vs informatii - C1
+3) Independenta datelor - C1
+4) Integritatea datelor - C1, C8
+5) Sisteme de gestiune a bazelor de date (prop., avantaje) - C1, C2
+6) Arhitectura sistemelor cu baze de date - C3, C4
+7) Limbajele bazelor de date - C3, C7
+8) Modelare conceptuala - C1, C3
+9) Modelul de date relational - C3, C4, C5
+10) Cardinalitatea asocierilor - C4
+11) Relatii matematice/algebra relationala - C5, C7
+12) Transformarea modelului ER in relatii - C5
+13) Model logic baza de date - C1, C6
+14) Interogari sql (CRUD, join) - C6, C7
+15) Integritatea referentiala - C8
+16) Vederi SQL (View) - C8
+17) Normalizarea - C9
+18) Multimi de dependente functionale - C9
+19) Formele normale - C9
+20) Tranzactii - C10
+21) Baze de date NoSQL - C11
+22) ACID vs BASE - C12
+23) CEP (Complex Event Processing) - C12
+24) NLP (NLP-Natural Language Processing) - C12
+25) Teorema CAP - C12
+26) Intrebari din laboratoare (L1-L10)
+
+Bibliografie:
+a) Biblioteca Univ: 
+http://193.254.231.34/liberty3/gateway/gateway.exe 
+(baze de date - cursuri si/sau carti)
+
+Studentii cu proiecte intarziate:
+- programare operatii CRUD pe 3 tabele pe scheletul de aplicatie JEE: https://github.com/aclblaj/vdb + referate prezenta
+Termen: ziua de consultatii pentru examen. 
+
+Exemplu examen: 
+90/100:
+15 sb1.1: A/B Reguli integritate / Tranzactii
+15 sb1.2: A/B Pasi de dezvoltare a bazei de date / Trigger
+12 sb2
+	2.1 Ce este un index? (2)
+	2.2 Ce este injectia de SQL (2)
+	2.3 La ce sunt folosite procedurile stocate (4)
+	2.4 Exemplu de join natural (4)
+10 sb3: fiid data o relatie student, curs, profesor
+	3.1 De cate ori poate un student sa participe la un examen?
+	3.2 Cum se modifica diagrama relatiei cand un examen se poate sustine la un singur profesor?
+	3.3 Modelati examinarea pe grupe
+
+12 sb4: propuneti modelul conceptual si diagrama entitate relatie  pentru:
+        a) problema de gestiune a resurselor umane (o firma are departamente, in departamente lucreaza angajati, un angajat este implicat un unul sau mai multe proiecte)
+        sau
+        b) problema gestiunii unui turneu de tenis
+
+16 sb5: Interogari SQL
+	5.1 Numarul de angajati per departament (4) 
+	(2) - a) select count(idA) from dept where idDept = '45';
+	(4) b) group by
+	select count(idA), idDept, denDept from Dept
+	group by idDept
+	
+	5.2 Numarul de puncte al uni jucator? (pb. turneu tenis) (4)
+	5.3 Lista adversarilor unui jucator.(pb. turneu tenis) (4)
+	5.4 Lista castigatorilor turneului de tenis.(pb. turneu tenis) (4)
+
+10 sb6
+	6.1 Cu ce comanda SQL se pot sterge inregistrarile?
+	6.2 Exemplu de comanda update
+	6.3 Ce urmeaza dupa clauza where intr-un select?
+	6.4 Functii de agregare sql
+	6.5 Care interogare este corecta?
+		a)	SELECT * FROM Sales WHERE Date BETWEEN '10/12/2013' AND '01/01/2014'
+		b)	SELECT FROM Sales WHERE Date BETWEEN '10/12/2013' AND '01/01/2014'
+		c)	SELECT FROM Sales WHERE Date BETWEEN ('10/12/2013', '01/01/2014')
+
+	
+
+
