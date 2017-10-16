@@ -12,6 +12,7 @@ public class Ex4{
 		
 			x=sc.nextLine();
 			x=new StringBuilder(x).reverse().toString();
+			x=x.replaceAll("SA", "aaa");
 			System.out.println(x);
 		}
 		catch (FileNotFoundException e) {
