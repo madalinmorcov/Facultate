@@ -23,8 +23,11 @@ Enumerati avantaje ale utilizarii bazelor de date.
 	Reduntanta a datelor redusa
 	Prezervarea consistentei datelor
 	Partajarea datelor
+	Posibilitatea de interogarea a tabelelor de date
 	
 Independenta datelor.
-	
+	Independenta datelor înseamna ca exista o delimitare stricta între reprezentarea fizica a datelor si imaginea pe care o are utilizatorul asupra acestor date
 Enumerati obiective ale bazelor de date.
-	
+	Centralizarea datelor
+	Independenta între date si program
+	Realizarea de legaturi între entitatile de date
