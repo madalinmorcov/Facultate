@@ -1,0 +1,12 @@
+SABC
+abc
+S
+S->aA
+S->bB
+S->cC
+A->aA
+A->a
+B->bB
+B->b
+C->cC
+C->c
