@@ -1,1 +1,0 @@
-select * from person where extract(year from birthdate) > 1997
